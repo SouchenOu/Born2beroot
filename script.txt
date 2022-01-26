@@ -1,0 +1,31 @@
+Architecture=$(uname -a)
+CPUphysical=$(lscpu | grep '^CPU(s):' | awk '{print $2}')
+ProcessuVirtuel=$(grep -c '^processor' /proc/cpuinfo)
+MemoryUsed=$(free -m | grep '^Mem' | awk '{print $3}')
+MemoryTotal=$(free -m | grep '^Mem' | awk '{print ($2"MB")}')
+MemoryPercent=$(free -m | grep '^Mem' | awk '{printf ("(%.2f%%)", ($3 * 100) / $2)}')
+DisqueUsage=$(df --total -h | grep "^total" | awk '{printf("%d/%dGb (%.2f%%)", $3 * 1024, $2, ($3 * 100) / $2)}')
+CPULoad=$(top -bn1 | grep '^%Cpu' | awk '{printf("%.2f%%", $2 + $4)}')
+LastBoot=$(who -b | awk '{print $3,$4}')
+LVMuse1=$(lsblk | grep -c "lvm")
+LVMuse2=$(if [ $LVMuse1 -eq 0 ]; then echo no; else echo yes; fi)
+ConnexionTcp=$(cat /proc/net/sockstat | grep '^TCP' | awk '{print($3)}')
+UserLog=$(users | wc -w)
+NetworkIP=$(hostname -I)
+NetworkMac=$(ip link | grep 'link/ether' | awk '{print($2)}')
+Sudo=$(grep 'COMMAND' /var/log/sudo/fichier | wc -l)
+
+wall "
+#Architecture:$Architecture
+#CPU physical:$CPUphysical
+#vCPU:$ProcessuVirtuel
+#Memory Usage:$MemoryUsed/$MemoryTotal $MemoryPercent
+#Disque Usage:$DisqueUsage
+#CPU load :$CPULoad
+#Last boot:$LastBoot
+#LVM use:$LVMuse2
+#Connexion TCP:$ConnexionTcp ESTABLISHED
+#User log:$UserLog
+#Network: IP $NetworkIP ($NetworkMac)
+#Sudo: $Sudo cmd
+"

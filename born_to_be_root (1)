@@ -1,0 +1,175 @@
+
+*****************************************************************
+--On a 3 version de debian (stable,testing,unstable)
+--On va installer la version stable si on a des nouvel utilisateur 
+--Si vous êtes un utilisateur avec des experience dans les system dexploitation on utilise la version unstable 
+******************************************************************
+----A virtual machine (VM): is a virtual environment that works like a computer inside of a computer. It will run on an isolated partition of its host computer with its own resources of CPU power, memory, an operating system, and other resources.
+*******************************************************************
+----Virtualization is that allows multiple VMs to run on a single machine
+*******************************************************************  
+-----LVM:—LVM : (logical volume manager) permet de gérer des partitions logiques et non pas physique.C’est un logiciel de gestion d’utilisation des espaces de stockage d’un ordinateur.
+*******************************************************************
+Hypervisor:—is software that creates and runs virtual machines (VMs).
+allows multiple virtual machines (VMs) to run on the same host hardware.
+and maximizing the effective use of computing resources. The resources of the host—such as CPU, GPU, memory, storage space, and network bandwidth.
+***********************************************************************
+
+***********************************************************************
+La difference entre apt and aptitude:
+In debian the default package manager we can use is dpkg , this tools allows us to manager install and remove programs in the operating systems .this programs comes with a list of dependencies to function the program that why we installed apt (advance program tool) can be used to install all the dependencies , so after installing apt we can install any program by using a single command .
+With apt we can install any program without worrying about dependencies.
+Apt can works with different backend and front end to make use of it services. 
+One of them is apt-get that makes us to install and remove different packages(we can say that apt have some tools like apt_get and apt_cache)but in case we want to use graphical interface we will have to use aptitude
+Apt is a low level package manager but aptitude is a high level package manager.
+Aptitude has a better package management than apt.
+(We can tape la commande apt-cach search ssh and aptitude search ssh to show one of the different between apt and aptitude ).
+******************************************************************
+debian ou bien centos:
+I choose Debian it's easier to install and configure than CentOS
+Il ya beaucoup des packages sur Debian.
+On ne besoin pas beaucoup des expérience en linux pour utiliser Debian.
+******************************************************************
+What is app armor:
+(MAC) security ,appArmor allows the system administrator to restrict the actions that processes can perform.if an installed application can take photos by accessing the camera application, but the administrator denies this privilege.
+*********************************************************************
+-—Le partitionnement est un fractionnement d'un disque dur réel (matériel) en plusieurs  disques virtuels (logiciels).
+*************************************************************
+—- on va demander de changer votre login qui suivi par 42 (souchen42)
+** SSH est « un protocole pour la connexion à distance sécurisée et d’autres services réseau sécurisés sur un réseau non sécurisé .
+Pour vous connecter via SSH, vous aurez besoin d’au moins quatre informations :ssh -p 4242 souchen@10.12.100.180
+* Adresse serveur
+* Nom d’utilisateur
+* Mot de passe
+* port
+* On met ici 4242 Ala place de 22 le port par-defaut  parce que nous devons prenons la sécurité très au sérieux, c’est pourquoi nous utilisons différents ports pour différents sites, et aussi pour réduire le nombre attaques par force brute.
+* Remplacez le port 22 par un port entre 1024 et 65536.
+* Pour êtres sur que le port existe pas on utilise la commande sudo cd /etc/services et on cherche sur le fichier services sur ce port .
+*******************************************************************
+La difference entre ipv4 et ipv6:
+Ipv4 cest la premier version stable du protocole ip.
+Ipv6 cest la dernier version stable du protocole ip
+Un problem majeur va se poser dans les années a venir , tout les adresses ipv4 seront bientôt attribuées, un nouveau protocole nommer ipv6 a commencer a être deployer pour fixer ce problem.
+On a trois class pour chaque ip (class a et class b et class c)
+********************************************************************
+/home:
+Contient tout les donner personnel ici on trouve tout les utilisateur que jai créer.
+/tmp:
+On se trouve les fichier qui ne sont nécessaire que temporaire.
+Ou moment de la modification dun fichier on ce trouve ce fichier dans le dossier tmp,
+ce fichier tmp contient aussi des page web au moment de leur visionnement.
+/racine ou bien root ;
+Si jai pas fait aucune changement on ce trouve dans ce fichier tout les donner personnel et tout les fichier de configuration ,les programme , on se trouve aussi les partition virtuel de disque.
+/var;
+var :cest comme un journal on ce trouve dans ce journal tout les donner variable (tout les évènements qui ont affecter mon system) les application qui ont installer les logiciel les serveur ext.
+/dev:
+Tout les périphériques identifier a un fichier qui se trouve dans le répertoire dev
+cest pour ca quand on reinstall linux ou bien formater linux  on ne perde pas notre donner  
+/srv:
+On utilise ce fichier quand on héberge un site et on va accéder depuis plusieurs os .
+*******************************************************************
+— les commandes :********************************
+(ssh -p 4242 souchen@10.12.100.180) utiliser cette commande pour connecter a un serveur via ssh
+**(lsblk) : pour voir interface principale de notre travail
+** (su -) : switch to root ou bien on commence chaque commande avec sudo (pour que administrateur va donner lacees  pour tapez les commande comme un super utilisateur ) 
+** pour installer quelque chose on commance par (apt install )…
+** pour voir tout les group quand a sur notre system on tape (cat /etc/group)
+** pour voir tout les utilisateur quand a sur notre system on tape (cat /etc/passwd)
+** pour ajouter un utilisateur a un group on tape la commande suivant (adduser souchen sudo ) donc on ajoute ici souchen a le group sudo  
+** pour ajouter un group on utilise la commande (add group test) par example ici on ajout le group test
+** pour supprimer un group sous linux on tape (groupdel test ) on supprime ici le group test
+** pour vérifier est ce que lutilisateur a bien ajouter ou bien non on tape (getent group sudo) pour voir les information pour le group sudo
+** pour accepte les changement qu’on a fait sur votre system on tape (reboot)
+ ** tout les commandes que jai tapez sur mon System il se trouve dans ce fichier (/var/log/sudo/fichier) c’est pour ca on tape sur le fichier (sudo visudo)(ca c’est le fichier de configuration de sudo ) defaults log-input et defaults log_output et aussi le path ou se trouve le fichier ou les commande sont écrit.
+** mon hostname est souchen42 on peut changer ce hostname on entrer a le dossier /etc et on entrer a le fichier hostname on utilise la command (vim hostname ) est on changer le nom. Et on a aussi l’utilisateur souchen
+Qui on va ajouter a le group sudo et user42.
+** pour être sur que certain fichier est installer on tape dpkg -l si on tape cette commande on va voir tout les paquet quand a sur notre system donc pour specifier on tape (dpkg -l | grep sudo ) pour cette commande on va être sur que cette commande et bien installer .
+** pour entrer a le fichier de configuration de ssh on tape sudo (vim /etc/ssh/sshd_config) ici on change le numero de port vers 4242.
+**pour être sur que ssh est active on tape (sudo service ssh status) ou (systemctl status ssh)
+****** setting up a strong password
+On a deux étapes:
+1***Password age; (juste les 3 question)
+On met des changement sur ce fichier : sudo vim /etc/login.defs
+On change pass-MAX_DAY : le mot de pass sera changer chaque 30 jours
+On change pass_min_day : le nombre minimum pour changer un mot de pass
+On change pass_warn_day : l'utilisateur devra recevoir un message avant que le mot de passe sera expire
+Ici mon utilisateur est créer avant cette changement donc on dois changer le max et le min et warn days pour mon utilisateur avec la commande (sudo chage souchen) et aussi pour le root (sudo chage root)
+// pout être sur que cette change est bien enregistrer on tape la commande (sudo chage -l  souchen)
+
+Alors pour changer le password age on met la commande (sudo change souchen)
+2***Password strength:
+On met les changement sur le fichier (sudo /etc/pam.d/common_password)
+- On utilise maxrepeat = 3 pour ne utilise pas une character 3 fois 
+- On utilize  minlen=10 pour le mot de pass sera comforter 10 character.
+- On utilise ucredit = -1 pour que le password contain une seul uppercase character
+- On utilise credit = -1 pour que le password contain une seul numeric character
+- On utilise reject_username pour que le password ne contient pas le nom de lutulisateur
+- Defolk =7 pour que il dois entrer un mot de pass qui devra comporter au mois 7 characters qui ne sont pas present dans ancien characters
+- On utilize retry = 3 is on tape un mod de pass incorrect 3 fois le system demeaned a repeater ce mod de pass a nouveau.
+- // to implement the same policy on root on tape (enforce_for_root)
+***************************************************
+After the encrypted volumes have been configured, no additional changes to the partitions on the disks containing encrypted volumes are allowed
+**************************************************
+Ufw:
+Pour être sur que ufw est bien install on tape (dpkg -l | grep ufw).
+Pour activer ufw on tape (sudo ufw enable).
+If you want to check status of ufw on tape: (sudo service ufw status). 
+********************************************************
+Ssh:
+Pour connecter au serveur on doit installer  le protocole ssh 
+Pour être sur que le ssh est bien installer on tape (sudo service ssh status)
+Ou bien (systemctl status ssh).
+*********************************************************
+To check that the chosen os is debian:
+head -n 2 /etc/os-release
+*******************************************
+The advantage of password policy is to be sur that your password is harder to crack.
+*************************************************************************
+Pour le fichier de configuration de sudo est visudo
+iSo on tape la commande (sudo visudo)
+A l'intérieur de fichier visudo on a une path ou se trouve un fichier ou on se trouve tout les commande non a écrit.
+
+************************************************************************
+How lvm work :
+Lvm allowing for dynamic volume resizing
+**************************************************************************
+
+Tty c'est le nom de terminal connecter a lente standard
+Use to restrict the apps from running sudo in background processes.
+***********************************************************************
+Ou se trouve monitoring.sh
+/usr/local/bin/monitoring.sh
+*******************************************************************
+Ufw :
+Once we have UFW installed, we can choose which ports we want to allow connections, and which ports we want to close. This will also be very useful with SSH, greatly improving all security related to communications between devices.
+*************************************************************
+Cron tab
+Sudo crontab -u root -e
+Crontab: permet d'exécuter toutes sortes de taches a des heures jours ....
+c'est un outil qui permet de lancer des application de manière régulière .
+***********************************************************************
+sudo mariadb -u souchen -p
+Password : test1337
+GRANT ALL PRIVILEGES ON soukaina.* TO 'souchen'@'localhost'
+FTP or the File Transfer Protocol is the most popular network protocol that is used to transfer files and information between two systems over a network. However, the FTP by default does not encrypt the traffic, which is not a secure method and can result in an attack on a server.
+******************
+Le protocole ftp:
+(Partie client:)
+La commande help et lpwd lcd 
+sftp -oPort=4242 ouch@10.12.100.63
+Lcd Desktop
+Put fichier
+Partie serveur:
+1: ajouter user.
+2:ecrire le nom de utilisateur ici : echo "ftpuser" | sudo tee -a  /etc/vsftpd.userlist.
+3 ajouter un document :sudo mkdir -p /home/ftpuser/ftp_dir
+4 changer quelque condition ici sudo vim /etc/vsftpd.conf
+***************************************************
+Lighttpd:is an open source web server.
+Mariadb: est un system de gestion de base de donner.
+Bios ; cest un composant essentiel de ordinateur(c'est n programme) situer sous la carte
+ mere de ordinateur.
+Le bios cast le premier programme charger en memoir des que vous allumer votre ordinateur.
+Il contain un programme qui permet de modifier les paramètres de la carte mere.
+Kernel: is the heart of os.
+***********
